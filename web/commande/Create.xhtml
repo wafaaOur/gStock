@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:panel>
+            <h:form>
+                <h1><h:outputText value="Create Commande"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="DateCommande:" for="dateCommande" />
+                    <p:inputText id="dateCommande" value="#{commandeController.selected.dateCommande}" title="DateCommande" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </p:inputText>
+                    <p:outputLabel value="MontantTotal:" for="montantTotal" />
+                    <p:inputText id="montantTotal" value="#{commandeController.selected.montantTotal}" title="MontantTotal" />
+                    <p:outputLabel value="Fournisseur:" for="fournisseur" />
+                    <p:selectOneMenu id="fournisseur" value="#{commandeController.selected.fournisseur}" >
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </h:form>
+        </p:panel>
+        
+        <p:panel>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Quantite:" for="quantite" />
+                    <p:inputText id="quantite" value="#{commandeItemController.selected.quantite}" title="Quantite" />
+                    <p:outputLabel value="Produit:" for="produit" />
+                    <p:selectOneMenu id="produit" value="#{commandeItemController.selected.produit}" >
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+            </h:form>
+        
+        
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{commandeItemController.items}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="PrixCommandeItem"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prixCommandeItem}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Quantite"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quantite}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Produit"/>
+                        </f:facet>
+                        <h:outputText value="#{item.produit}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

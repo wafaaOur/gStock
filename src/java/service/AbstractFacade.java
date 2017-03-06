@@ -38,6 +38,14 @@ public abstract class AbstractFacade<T> {
         return getEntityManager().find(entityClass, id);
     }
 
+    public Long generateId(String beanName, String idName) {
+        List<Long> maxId = getEntityManager().createQuery(" Select max(item." + idName + ") FROM " + beanName + " item").getResultList();
+        if (maxId == null || maxId.isEmpty() || maxId.get(0) == null) {
+            return 1L;
+        }
+        return maxId.get(0) + 1;
+    }
+
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

@@ -20,6 +20,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Stock implements Serializable {
 
+    @ManyToOne
+    private Livraison livraison;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

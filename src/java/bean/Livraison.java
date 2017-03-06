@@ -28,6 +28,7 @@ public class Livraison implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Commande commande;
+    @OneToMany(mappedBy = "livraison")
     private List<Stock> stocks;
     @OneToMany(mappedBy = "livraison")
     private List<LivraisonItem> livraisonItems;

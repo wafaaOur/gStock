@@ -5,7 +5,9 @@
  */
 package service;
 
+import bean.Commande;
 import bean.CommandeItem;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,7 +21,10 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
 
     @PersistenceContext(unitName = "gSinventairePU")
     private EntityManager em;
-
+    private List<CommandeItem>commandeItems;
+    
+    
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -28,5 +33,25 @@ public class CommandeItemFacade extends AbstractFacade<CommandeItem> {
     public CommandeItemFacade() {
         super(CommandeItem.class);
     }
+    public List<CommandeItem> findById(Long id) {
+        return em.createQuery("SELECT ci FROM CommandeItem ci WHERE ci.id= '" + id + "'").getResultList();
+    }
+    
+    public List<CommandeItem> findByProduit(Long id) {
+        return em.createQuery("SELECT ci FROM CommandeItem ci WHERE ci.produit.id= '" + id + "'").getResultList();
+    }
+    
+    public List<CommandeItem> findByCommande(Long id) {
+        return em.createQuery("SELECT ci FROM CommandeItem ci WHERE ci.commande.id= '" + id + "'").getResultList();
+    }
+
+    public List<CommandeItem> getCommandeItems() {
+        return commandeItems;
+    }
+
+    public void setCommandeItems(List<CommandeItem> commandeItems) {
+        this.commandeItems = commandeItems;
+    }
+
     
 }
